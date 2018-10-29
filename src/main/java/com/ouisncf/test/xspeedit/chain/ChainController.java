@@ -42,6 +42,12 @@ public class ChainController {
         );
     }
 
+    @GetMapping("{id}")
+    public Resource<Chain> one(@PathVariable Long id) {
+        return assembler.toResource(chainService.getOne(id));
+
+    }
+
     @PostMapping
     public Chain createChain(@RequestBody ChainRequestModel chainRequestModel) {
         return chainService.createChain(chainRequestModel.getArticles());

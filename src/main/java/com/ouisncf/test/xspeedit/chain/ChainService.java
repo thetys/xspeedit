@@ -48,4 +48,10 @@ public class ChainService {
     public List<Chain> getAll() {
         return chainRepository.findAll();
     }
+
+    public Chain getOne(Long id) {
+        return chainRepository
+                .findById(id)
+                .orElseThrow(() -> new ChainNotFoundException(id));
+    }
 }
