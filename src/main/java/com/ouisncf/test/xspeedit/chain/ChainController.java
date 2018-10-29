@@ -1,12 +1,16 @@
 package com.ouisncf.test.xspeedit.chain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(
@@ -16,15 +20,26 @@ import java.util.List;
 )
 public class ChainController {
 
-    private ChainService chainService;
+    private final ChainService chainService;
+    private final ChainResourceAssembler assembler;
 
-    public ChainController(@Autowired ChainService chainService) {
+    public ChainController(
+            @Autowired ChainService chainService,
+            @Autowired ChainResourceAssembler assembler
+    ) {
         this.chainService = chainService;
+        this.assembler = assembler;
     }
 
     @GetMapping
-    public List<Chain> getAllChains() {
-        return chainService.getAll();
+    public Resources<Resource<Chain>> all() {
+        List<Resource<Chain>> chains = chainService.getAll().stream()
+                .map(assembler::toResource)
+                .collect(Collectors.toList());
+        return new Resources<>(
+                chains,
+                linkTo(methodOn(ChainController.class).all()).withSelfRel()
+        );
     }
 
     @PostMapping
