@@ -3,6 +3,8 @@ package com.ouisncf.test.xspeedit.chain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("chains")
 public class ChainController {
@@ -11,6 +13,11 @@ public class ChainController {
 
     public ChainController(@Autowired ChainService chainService) {
         this.chainService = chainService;
+    }
+
+    @GetMapping
+    public List<Chain> getAllChains() {
+        return chainService.getAll();
     }
 
     @PostMapping

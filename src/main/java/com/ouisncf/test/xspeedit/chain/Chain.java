@@ -2,19 +2,27 @@ package com.ouisncf.test.xspeedit.chain;
 
 import com.ouisncf.test.xspeedit.article.Article;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Chain {
 
-    private final long id;
-    private final List<Article> articles;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Chain(long id, List<Article> articles) {
-        this.id = id;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Article> articles;
+
+    public Chain() {
+    }
+
+    public Chain(List<Article> articles) {
         this.articles = articles;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
