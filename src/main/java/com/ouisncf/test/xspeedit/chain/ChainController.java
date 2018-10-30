@@ -1,6 +1,7 @@
 package com.ouisncf.test.xspeedit.chain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(
         value = "chains",
         consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+        produces = MediaTypes.HAL_JSON_UTF8_VALUE
 )
 public class ChainController {
 
@@ -50,6 +51,7 @@ public class ChainController {
 
     @PostMapping
     public Chain createChain(@RequestBody ChainRequestModel chainRequestModel) {
+        //TODO: personnaliser le message d'erreur 400
         return chainService.createChain(chainRequestModel.getArticles());
     }
 }
