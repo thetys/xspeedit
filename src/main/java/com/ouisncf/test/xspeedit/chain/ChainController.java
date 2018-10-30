@@ -5,8 +5,11 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,8 +53,14 @@ public class ChainController {
     }
 
     @PostMapping
-    public Chain createChain(@RequestBody ChainRequestModel chainRequestModel) {
+    public ResponseEntity<Resource<Chain>> createChain(@RequestBody ChainRequestModel chainRequestModel) throws URISyntaxException {
+        Resource<Chain> resource = assembler.toResource(
+                chainService.createChain(chainRequestModel.getArticles())
+        );
         //TODO: personnaliser le message d'erreur 400
-        return chainService.createChain(chainRequestModel.getArticles());
+        return ResponseEntity
+                .created(new URI(resource.getId().expand().getHref()))
+                .body(resource)
+                ;
     }
 }

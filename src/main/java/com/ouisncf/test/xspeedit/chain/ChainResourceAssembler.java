@@ -13,6 +13,7 @@ public class ChainResourceAssembler implements ResourceAssembler<Chain, Resource
     public Resource<Chain> toResource(Chain chain) {
         return new Resource<>(
                 chain,
+                linkTo(methodOn(ChainController.class).one(chain.getId())).withSelfRel(),
                 linkTo(methodOn(ChainController.class).all()).withRel("chains")
         );
     }
