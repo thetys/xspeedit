@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import java.util.HashMap;
 
 @ControllerAdvice
 public class ChainNotFoundAdvice {
@@ -14,8 +14,10 @@ public class ChainNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(ChainNotFoundException.class)
     ResponseEntity<Object> chainNotFoundHandler(ChainNotFoundException ex) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("error", ex.getLocalizedMessage());
         return new ResponseEntity<>(
-                Map.of("error", ex.getMessage()),
+                body,
                 HttpStatus.NOT_FOUND
         );
     }
