@@ -23,6 +23,9 @@ public class ChainService {
      * @return Chain Newly created chain
      */
     public Chain createChain(String articles) {
+        if (!articles.matches("^\\d+$")) {
+            throw new IllegalArgumentException("Articles list must be be a number sequence with at least one element");
+        }
         return chainRepository.save(
                 new Chain(splitToListOfArticles(articles))
         );
