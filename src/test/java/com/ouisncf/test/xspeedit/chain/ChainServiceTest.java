@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @Import(ChainService.class)
@@ -114,5 +116,18 @@ public class ChainServiceTest {
     @Test(expected = ChainNotFoundException.class)
     public void shouldNotFoundAnUnknownChain() {
         Chain fetchedChain = chainService.getOne(1L);
+    }
+
+    @Test
+    public void shouldPackArticles() {
+        Chain chain = entityManager.persist(
+                new Chain(
+                        IntStream.of(1,6,3,8,4,1,6,8,9,5,2,5,7,7,3)
+                        .mapToObj(Article::new)
+                        .collect(Collectors.toList())
+                        )
+                );
+        chainService.pack(chain);
+        Assert.assertEquals("163/8/41/6/8/9/52/5/7/73", chain.getPackaging());
     }
 }
