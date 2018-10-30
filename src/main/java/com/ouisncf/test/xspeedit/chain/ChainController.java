@@ -19,7 +19,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 @RequestMapping(
         value = "chains",
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
         produces = MediaTypes.HAL_JSON_UTF8_VALUE
 )
 public class ChainController {
