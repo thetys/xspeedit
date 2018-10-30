@@ -4,6 +4,7 @@ import com.ouisncf.test.xspeedit.article.Article;
 import com.ouisncf.test.xspeedit.box.Box;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,10 +22,12 @@ public class Chain {
     private List<Box> boxes;
 
     public Chain() {
+        boxes = new ArrayList<>();
     }
 
     public Chain(List<Article> articles) {
         this.articles = articles;
+        boxes = new ArrayList<>();
     }
 
     public Long getId() {
@@ -41,6 +44,7 @@ public class Chain {
 
     public String getPackaging() {
         return boxes.stream()
+                .filter(box -> box.getArticles().size() > 0)
                 .map(Box::getArticlesAsString)
                 .collect(Collectors.joining("/"));
     }

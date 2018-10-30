@@ -15,9 +15,10 @@ public class Box {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Article> articles = new ArrayList<>();
+    private List<Article> articles;
 
     public Box() {
+        articles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -34,10 +35,10 @@ public class Box {
 
     /**
      * Return the articles in the box as a string.
-     * An article is defined by its size
+     * An article is defined by its size.
      *
-     * If the box contains 3 articles with respective sizes as 3, 7 and 5
-     * The function will return the string "375"
+     * If the box contains 3 articles with respective sizes as 3, 7 and 5,
+     * the function will return the string "375"
      *
      * @return String Article sizes as a string
      */
