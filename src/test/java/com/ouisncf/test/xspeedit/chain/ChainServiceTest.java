@@ -48,6 +48,11 @@ public class ChainServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void shouldRefuseAnyZero() {
+        chainService.createChain("456089");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void shouldRefuseSpaces() {
         chainService.createChain(" 456");
     }

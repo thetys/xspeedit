@@ -23,8 +23,8 @@ public class ChainService {
      * @return Chain Newly created chain
      */
     public Chain createChain(String articles) {
-        if (!articles.matches("^\\d+$")) {
-            throw new IllegalArgumentException("Articles list must be be a number sequence with at least one element");
+        if (!articles.matches("^[1-9]+$")) {
+            throw new IllegalArgumentException("Article list must be a positive digit sequence with at least one element.");
         }
         return chainRepository.save(
                 new Chain(splitToListOfArticles(articles))
@@ -56,5 +56,9 @@ public class ChainService {
         return chainRepository
                 .findById(id)
                 .orElseThrow(() -> new ChainNotFoundException(id));
+    }
+
+    public Chain pack(Chain chain) {
+        return chain;
     }
 }
