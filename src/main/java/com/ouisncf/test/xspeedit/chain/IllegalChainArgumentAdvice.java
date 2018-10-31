@@ -1,5 +1,6 @@
 package com.ouisncf.test.xspeedit.chain;
 
+import com.ouisncf.test.xspeedit.chain.exception.IllegalChainArgumentException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 
 @ControllerAdvice
-public class IllegalArgumentAdvice {
+public class IllegalChainArgumentAdvice {
 
     @ResponseBody
-    @ExceptionHandler(IllegalArgumentException.class)
-    ResponseEntity<Object> illegalArgumentHandler(IllegalArgumentException ex) {
+    @ExceptionHandler(IllegalChainArgumentException.class)
+    ResponseEntity<Object> illegalChainArgumentHandler(IllegalChainArgumentException ex) {
         HashMap<String, String> body = new HashMap<>();
         body.put("error", ex.getLocalizedMessage());
         HttpHeaders headers = new HttpHeaders();

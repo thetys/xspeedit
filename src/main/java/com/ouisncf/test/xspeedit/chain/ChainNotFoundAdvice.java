@@ -1,5 +1,6 @@
 package com.ouisncf.test.xspeedit.chain;
 
+import com.ouisncf.test.xspeedit.chain.exception.ChainNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

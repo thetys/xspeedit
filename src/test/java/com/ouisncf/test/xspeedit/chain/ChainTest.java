@@ -2,6 +2,7 @@ package com.ouisncf.test.xspeedit.chain;
 
 import com.ouisncf.test.xspeedit.article.Article;
 import com.ouisncf.test.xspeedit.box.Box;
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;

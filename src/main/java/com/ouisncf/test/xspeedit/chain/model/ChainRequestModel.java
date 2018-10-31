@@ -1,4 +1,4 @@
-package com.ouisncf.test.xspeedit.chain;
+package com.ouisncf.test.xspeedit.chain.model;
 
 public class ChainRequestModel {
 

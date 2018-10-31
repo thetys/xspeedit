@@ -1,7 +1,12 @@
-package com.ouisncf.test.xspeedit.chain;
+package com.ouisncf.test.xspeedit.chain.service;
 
 import com.ouisncf.test.xspeedit.article.Article;
 import com.ouisncf.test.xspeedit.box.Box;
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
+import com.ouisncf.test.xspeedit.chain.exception.ChainNotFoundException;
+import com.ouisncf.test.xspeedit.chain.entity.ChainRepository;
+import com.ouisncf.test.xspeedit.chain.exception.IllegalChainArgumentException;
+import com.ouisncf.test.xspeedit.chain.exception.NoArticleFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +32,7 @@ public class ChainService {
      */
     public Chain createChain(String articles) {
         if (!articles.matches("^[1-9]+$")) {
-            throw new IllegalArgumentException("Article list must be a positive digit sequence with at least one element.");
+            throw new IllegalChainArgumentException("Article list must be a positive digit sequence with at least one element.");
         }
         return chainRepository.save(
                 new Chain(splitToListOfArticles(articles))

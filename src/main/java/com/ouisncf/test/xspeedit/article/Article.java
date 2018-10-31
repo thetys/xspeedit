@@ -1,7 +1,7 @@
 package com.ouisncf.test.xspeedit.article;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ouisncf.test.xspeedit.chain.Chain;
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
 
 import javax.persistence.*;
 

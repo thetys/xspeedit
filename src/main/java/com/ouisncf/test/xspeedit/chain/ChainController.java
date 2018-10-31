@@ -1,5 +1,8 @@
 package com.ouisncf.test.xspeedit.chain;
 
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
+import com.ouisncf.test.xspeedit.chain.model.ChainRequestModel;
+import com.ouisncf.test.xspeedit.chain.service.ChainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;

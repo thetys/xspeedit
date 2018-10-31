@@ -1,5 +1,6 @@
 package com.ouisncf.test.xspeedit.chain;
 
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;

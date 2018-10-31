@@ -1,6 +1,9 @@
 package com.ouisncf.test.xspeedit.chain;
 
 import com.ouisncf.test.xspeedit.article.Article;
+import com.ouisncf.test.xspeedit.chain.entity.Chain;
+import com.ouisncf.test.xspeedit.chain.exception.ChainNotFoundException;
+import com.ouisncf.test.xspeedit.chain.service.ChainService;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;

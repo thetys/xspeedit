@@ -1,4 +1,4 @@
-package com.ouisncf.test.xspeedit.chain;
+package com.ouisncf.test.xspeedit.chain.entity;
 
 import com.ouisncf.test.xspeedit.article.Article;
 import com.ouisncf.test.xspeedit.box.Box;
