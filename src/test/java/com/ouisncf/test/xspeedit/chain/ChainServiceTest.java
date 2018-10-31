@@ -120,14 +120,19 @@ public class ChainServiceTest {
 
     @Test
     public void shouldPackArticles() {
-        Chain chain = entityManager.persist(
+        Chain chain =
                 new Chain(
                         IntStream.of(1,6,3,8,4,1,6,8,9,5,2,5,7,7,3)
                         .mapToObj(Article::new)
                         .collect(Collectors.toList())
-                        )
                 );
         chain = chainService.packChain(chain);
+        Assert.assertEquals("91/82/81/73/73/64/6/55", chain.getPackaging());
+    }
+
+    @Test(expected = NoArticleFoundException.class)
+    public void shouldRefuseToPackAnEmptyChain() {
+        Chain chain = chainService.packChain(new Chain());
         Assert.assertEquals("91/82/81/73/73/64/6/55", chain.getPackaging());
     }
 }

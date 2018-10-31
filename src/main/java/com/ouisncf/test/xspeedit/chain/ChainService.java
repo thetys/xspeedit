@@ -68,6 +68,10 @@ public class ChainService {
      * @return Chain The parameter after modifications
      */
     public Chain packChain(Chain chain) {
+        if(chain.getArticles().isEmpty()) {
+            throw new NoArticleFoundException(chain.getId());
+        }
+
         chain.getBoxes().clear();
 
         chain.getArticles().stream()

@@ -22,6 +22,7 @@ public class Chain {
     private List<Box> boxes;
 
     public Chain() {
+        articles = new ArrayList<>();
         boxes = new ArrayList<>();
     }
 
