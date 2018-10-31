@@ -10,8 +10,4 @@ public class ChainRequestModel {
     public String getArticles() {
         return articles;
     }
-
-    public void setArticles(String articles) {
-        this.articles = articles;
-    }
 }

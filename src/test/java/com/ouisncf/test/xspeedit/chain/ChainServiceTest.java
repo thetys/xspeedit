@@ -44,6 +44,11 @@ public class ChainServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void shouldRefuseANullParameter() {
+        chainService.createChain(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void shouldRefuseAnEmptyChain() {
         chainService.createChain("");
     }
