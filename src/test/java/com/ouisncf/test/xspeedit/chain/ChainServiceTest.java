@@ -127,7 +127,7 @@ public class ChainServiceTest {
                         .collect(Collectors.toList())
                         )
                 );
-        chainService.pack(chain);
-        Assert.assertEquals("163/8/41/6/8/9/52/5/7/73", chain.getPackaging());
+        chain = chainService.packChain(chain);
+        Assert.assertEquals("91/82/81/73/73/64/6/55", chain.getPackaging());
     }
 }

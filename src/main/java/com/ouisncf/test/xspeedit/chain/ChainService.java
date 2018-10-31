@@ -1,10 +1,13 @@
 package com.ouisncf.test.xspeedit.chain;
 
 import com.ouisncf.test.xspeedit.article.Article;
+import com.ouisncf.test.xspeedit.box.Box;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +61,39 @@ public class ChainService {
                 .orElseThrow(() -> new ChainNotFoundException(id));
     }
 
-    public Chain pack(Chain chain) {
-        return chain;
+    /**
+     * Pack the chain articles in boxes
+     *
+     * @param chain The chain to be packaged
+     * @return Chain The parameter after modifications
+     */
+    public Chain packChain(Chain chain) {
+        chain.getBoxes().clear();
+
+        chain.getArticles().stream()
+                .sorted(Comparator.comparingInt(Article::getSize).reversed())
+                .forEachOrdered(this::putInTheTightestSpot);
+
+        return chainRepository.save(chain);
+    }
+
+    /**
+     * Find the tightest spot in the chain boxes
+     * and put the article in it
+     * If no spot is found, a new box is created with the article inside
+     *
+     * @param article Article to put in a box
+     */
+    private void putInTheTightestSpot(Article article) {
+        Optional<Box> tightestSpotOptional = article.getChain().getBoxes().stream()
+                .filter(box -> box.getFreeSpace() >= article.getSize())
+                .min(Comparator.comparingInt(Box::getFreeSpace));
+        Box tightestSpot = tightestSpotOptional
+                .orElseGet(() -> {
+                    Box newBox = new Box();
+                    article.getChain().addBox(newBox);
+                    return newBox;
+                });
+        tightestSpot.addArticle(article);
     }
 }

@@ -52,9 +52,9 @@ public class ChainController {
 
     @PostMapping
     public ResponseEntity<Resource<Chain>> createChain(@RequestBody ChainRequestModel chainRequestModel) throws URISyntaxException {
-        Resource<Chain> resource = assembler.toResource(
-                chainService.createChain(chainRequestModel.getArticles())
-        );
+        Chain chain = chainService.createChain(chainRequestModel.getArticles());
+        chain = chainService.packChain(chain);
+        Resource<Chain> resource = assembler.toResource(chain);
         return ResponseEntity
                 .created(new URI(resource.getId().expand().getHref()))
                 .body(resource)

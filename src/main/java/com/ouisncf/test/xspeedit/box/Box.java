@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 @Entity
 public class Box {
 
+    private static final int CAPACITY = 10;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Article> articles;
 
     public Box() {
@@ -47,5 +49,13 @@ public class Box {
                 .map(Article::getSize)
                 .map(String::valueOf)
                 .collect(Collectors.joining());
+    }
+
+    public int getFreeSpace() {
+        int usedSpace = articles
+                .stream()
+                .mapToInt(Article::getSize)
+                .sum();
+        return CAPACITY - usedSpace;
     }
 }
