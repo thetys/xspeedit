@@ -56,7 +56,7 @@ Retourne
 }
 ```
 
-La propriété initialization rappelle la liste des articles avec laquelle la châine a été créée.
+La propriété initialization rappelle la liste des articles avec laquelle la chaîne a été créée.
 La propriété packaging renvoie la répartition des articles dans les boîtes.
 
 Les propriétés articles et boxes contiennent ces informatiosn sous forme d'objets.
@@ -77,7 +77,7 @@ Crée une chaîne avec des articles et les répartit dans des boîtes
   - _boxes_ - liste d'objets JSON représentant les boîtes
   - _initialization_ - liste des articles sous forme de chaîne de caractères
   - _packaging_ - répartition des articles dans les boîtes sous forme de chaîne de caractères
-  - __links_ - liens hypermédia renvoyant sur la châine elle-même ou la liste des chaînes
+  - _\_links_ - liens hypermédia renvoyant sur la chaîne elle-même ou la liste des chaînes
 * **Erreur**
   - **400 Bad Request** - Il manque un ou plusieurs des paramètres requis ou certains paramètres n'ont pas une forme valide.
 * **Exemple**
@@ -222,4 +222,415 @@ Crée une chaîne avec des articles et les répartit dans des boîtes
       }
     }
   }
+  ```
+  
+  ### Afficher une chaîne
+
+Affiche une chaîne spécifique
+
+* **URL**: /chains/:id
+* **Méthode**: GET
+* **Paramètres de la requête**:
+  - _id (requis)_ - id de la chaîne à afficher
+* **Format de retour**: un objet JSON représentant la chaîne, avec les propriété suivantes
+  - _id_ - id de la chaîne
+  - _articles_ - liste d'objets JSON représentant les articles
+  - _boxes_ - liste d'objets JSON représentant les boîtes
+  - _initialization_ - liste des articles sous forme de chaîne de caractères
+  - _packaging_ - répartition des articles dans les boîtes sous forme de chaîne de caractères
+  - _\_links_ - liens hypermédia renvoyant sur la chaîne elle-même ou la liste des chaînes
+* **Erreur**
+  - **404 Not Found** - Il n'existe pas de chaîne ayant l'id demandé.
+* **Exemple**
+
+  Requête
+  ```shell
+  curl http://localhost:8080/chains/1
+  ```
+  
+  Réponse
+  ```json
+  {
+    "id": 1,
+    "articles": [
+      {
+        "id": 1,
+        "size": 3
+      },
+      {
+        "id": 2,
+        "size": 6
+      },
+      {
+        "id": 3,
+        "size": 1
+      },
+      {
+        "id": 4,
+        "size": 5
+      },
+      {
+        "id": 5,
+        "size": 3
+      },
+      {
+        "id": 6,
+        "size": 4
+      },
+      {
+        "id": 7,
+        "size": 1
+      },
+      {
+        "id": 8,
+        "size": 7
+      },
+      {
+        "id": 9,
+        "size": 5
+      },
+      {
+        "id": 10,
+        "size": 3
+      },
+      {
+        "id": 11,
+        "size": 1
+      }
+    ],
+    "boxes": [
+      {
+        "id": 1,
+        "articles": [
+          {
+            "id": 8,
+            "size": 7
+          },
+          {
+            "id": 1,
+            "size": 3
+          }
+        ],
+        "freeSpace": 0,
+        "articlesAsString": "73"
+      },
+      {
+        "id": 2,
+        "articles": [
+          {
+            "id": 2,
+            "size": 6
+          },
+          {
+            "id": 6,
+            "size": 4
+          }
+        ],
+        "freeSpace": 0,
+        "articlesAsString": "64"
+      },
+      {
+        "id": 3,
+        "articles": [
+          {
+            "id": 4,
+            "size": 5
+          },
+          {
+            "id": 9,
+            "size": 5
+          }
+        ],
+        "freeSpace": 0,
+        "articlesAsString": "55"
+      },
+      {
+        "id": 4,
+        "articles": [
+          {
+            "id": 5,
+            "size": 3
+          },
+          {
+            "id": 10,
+            "size": 3
+          },
+          {
+            "id": 3,
+            "size": 1
+          },
+          {
+            "id": 7,
+            "size": 1
+          },
+          {
+            "id": 11,
+            "size": 1
+          }
+        ],
+        "freeSpace": 1,
+        "articlesAsString": "33111"
+      }
+    ],
+    "initialization": "36153417531",
+    "packaging": "73/64/55/33111",
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/chains/1"
+      },
+      "chains": {
+        "href": "http://localhost:8080/chains"
+      }
+    }
+  }
+  ```
+  
+  ### Afficher toutes les chaînes
+
+Affiche toutes chaînes existantes
+
+* **URL**: /chains
+* **Méthode**: GET
+* **Format de retour**: une liste d'objet JSON représentant les chaînes, avec les propriété suivantes
+  - _\_embedded_ - contient un objet chainList reprséentant une liste de chaînes
+  - _\_links_ - liens hypermédia renvoyant sur la liste des chaînes
+* **Exemple**
+
+  Requête
+  ```shell
+  curl http://localhost:8080/chains
+  ```
+  
+  Réponse
+  ```json
+  {
+  "_embedded": {
+    "chainList": [
+      {
+        "id": 1,
+        "articles": [
+          {
+            "id": 1,
+            "size": 3
+          },
+          {
+            "id": 2,
+            "size": 6
+          },
+          {
+            "id": 3,
+            "size": 1
+          },
+          {
+            "id": 4,
+            "size": 5
+          },
+          {
+            "id": 5,
+            "size": 3
+          },
+          {
+            "id": 6,
+            "size": 4
+          },
+          {
+            "id": 7,
+            "size": 1
+          },
+          {
+            "id": 8,
+            "size": 7
+          },
+          {
+            "id": 9,
+            "size": 5
+          },
+          {
+            "id": 10,
+            "size": 3
+          },
+          {
+            "id": 11,
+            "size": 1
+          }
+        ],
+        "boxes": [
+          {
+            "id": 1,
+            "articles": [
+              {
+                "id": 8,
+                "size": 7
+              },
+              {
+                "id": 1,
+                "size": 3
+              }
+            ],
+            "freeSpace": 0,
+            "articlesAsString": "73"
+          },
+          {
+            "id": 2,
+            "articles": [
+              {
+                "id": 2,
+                "size": 6
+              },
+              {
+                "id": 6,
+                "size": 4
+              }
+            ],
+            "freeSpace": 0,
+            "articlesAsString": "64"
+          },
+          {
+            "id": 3,
+            "articles": [
+              {
+                "id": 4,
+                "size": 5
+              },
+              {
+                "id": 9,
+                "size": 5
+              }
+            ],
+            "freeSpace": 0,
+            "articlesAsString": "55"
+          },
+          {
+            "id": 4,
+            "articles": [
+              {
+                "id": 5,
+                "size": 3
+              },
+              {
+                "id": 10,
+                "size": 3
+              },
+              {
+                "id": 3,
+                "size": 1
+              },
+              {
+                "id": 7,
+                "size": 1
+              },
+              {
+                "id": 11,
+                "size": 1
+              }
+            ],
+            "freeSpace": 1,
+            "articlesAsString": "33111"
+          }
+        ],
+        "initialization": "36153417531",
+        "packaging": "73/64/55/33111",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/chains/1"
+          },
+          "chains": {
+            "href": "http://localhost:8080/chains"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "articles": [
+          {
+            "id": 12,
+            "size": 1
+          },
+          {
+            "id": 13,
+            "size": 2
+          },
+          {
+            "id": 14,
+            "size": 3
+          },
+          {
+            "id": 15,
+            "size": 4
+          },
+          {
+            "id": 16,
+            "size": 5
+          },
+          {
+            "id": 17,
+            "size": 6
+          }
+        ],
+        "boxes": [
+          {
+            "id": 5,
+            "articles": [
+              {
+                "id": 17,
+                "size": 6
+              },
+              {
+                "id": 15,
+                "size": 4
+              }
+            ],
+            "freeSpace": 0,
+            "articlesAsString": "64"
+          },
+          {
+            "id": 6,
+            "articles": [
+              {
+                "id": 16,
+                "size": 5
+              },
+              {
+                "id": 14,
+                "size": 3
+              },
+              {
+                "id": 13,
+                "size": 2
+              }
+            ],
+            "freeSpace": 0,
+            "articlesAsString": "532"
+          },
+          {
+            "id": 7,
+            "articles": [
+              {
+                "id": 12,
+                "size": 1
+              }
+            ],
+            "freeSpace": 9,
+            "articlesAsString": "1"
+          }
+        ],
+        "initialization": "123456",
+        "packaging": "64/532/1",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/chains/2"
+          },
+          "chains": {
+            "href": "http://localhost:8080/chains"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/chains"
+    }
+  }
+}
   ```
