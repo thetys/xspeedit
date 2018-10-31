@@ -159,6 +159,7 @@ public class ChainControllerTest {
                 )
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
+                .andExpect(header().exists("Location"))
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.chains").exists())
         ;
