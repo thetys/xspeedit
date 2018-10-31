@@ -70,7 +70,7 @@ public class ChainController {
      *
      * @param chainRequestModel Model of the expected body of the request
      * @return ResponseEntity containing the newly created chain as a Resource
-     * @throws URISyntaxException
+     * @throws URISyntaxException Thrown by the creation to the chain link in the header of the response
      */
     @PostMapping
     public ResponseEntity<Resource<Chain>> createChain(@RequestBody ChainRequestModel chainRequestModel) throws URISyntaxException {
