@@ -71,6 +71,7 @@ public class ChainService {
 
     /**
      * Pack the chain articles in boxes
+     * Using Best Fit Decreasing algorithm
      *
      * @param chain The chain to be packaged
      * @return Chain The parameter after modifications
