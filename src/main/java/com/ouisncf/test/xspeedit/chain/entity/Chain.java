@@ -47,6 +47,15 @@ public class Chain {
         return boxes;
     }
 
+    public String getInitialization() {
+        return initialization;
+    }
+
+    /**
+     * Return a string describing the distribution of articles in boxes
+     *
+     * @return String Boxes as a string
+     */
     public String getPackaging() {
         return boxes.stream()
                 .filter(box -> box.getArticles().size() > 0)
@@ -56,9 +65,5 @@ public class Chain {
 
     public boolean addBox(Box box) {
         return boxes.add(box);
-    }
-
-    public String getInitialization() {
-        return initialization;
     }
 }

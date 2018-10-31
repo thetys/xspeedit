@@ -36,6 +36,11 @@ public class ChainController {
         this.assembler = assembler;
     }
 
+    /**
+     * Return all existing chains with hypermedia links
+     *
+     * @return Resources of a list of chain
+     */
     @GetMapping
     public Resources<Resource<Chain>> all() {
         List<Resource<Chain>> chains = chainService.getAll().stream()
@@ -47,12 +52,25 @@ public class ChainController {
         );
     }
 
+    /**
+     * Return a specific chain with hypermedia links
+     *
+     * @param id Long Id of the required chain
+     * @return Resource of a chain
+     */
     @GetMapping("{id}")
     public Resource<Chain> one(@PathVariable Long id) {
         return assembler.toResource(chainService.getOne(id));
 
     }
 
+    /**
+     * Create a new chain from a string containing a list of articles
+     *
+     * @param chainRequestModel Model of the expected body of the request
+     * @return ResponseEntity containing the newly created chain as a Resource
+     * @throws URISyntaxException
+     */
     @PostMapping
     public ResponseEntity<Resource<Chain>> createChain(@RequestBody ChainRequestModel chainRequestModel) throws URISyntaxException {
         Chain chain = chainService.createChain(chainRequestModel.getArticles());

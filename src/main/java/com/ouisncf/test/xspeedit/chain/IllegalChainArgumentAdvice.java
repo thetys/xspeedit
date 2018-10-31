@@ -11,9 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 
+/**
+ * Handle IllegalChainArgumentExceptions
+ */
 @ControllerAdvice
 public class IllegalChainArgumentAdvice {
 
+    /**
+     * Handle IllegalChainArgumentException and return the exception message
+     * in a JSON object with a 400 error status
+     *
+     * @param ex Handled exception
+     * @return A 400 error with an error text in a JSON object
+     */
     @ResponseBody
     @ExceptionHandler(IllegalChainArgumentException.class)
     ResponseEntity<Object> illegalChainArgumentHandler(IllegalChainArgumentException ex) {

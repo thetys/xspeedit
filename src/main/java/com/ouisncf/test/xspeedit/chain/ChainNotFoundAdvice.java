@@ -11,9 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 
+/**
+ * Handle ChainNotFoundExceptions
+ */
 @ControllerAdvice
 public class ChainNotFoundAdvice {
 
+    /**
+     * Handle ChainNotFoundException and return the exception message
+     * in a JSON object with a 404 error status
+     *
+     * @param ex Handled exception
+     * @return A 404 error with an error text in a JSON object
+     */
     @ResponseBody
     @ExceptionHandler(ChainNotFoundException.class)
     ResponseEntity<Object> chainNotFoundHandler(ChainNotFoundException ex) {
