@@ -21,12 +21,15 @@ public class Chain {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Box> boxes;
 
+    private String initialization;
+
     public Chain() {
         articles = new ArrayList<>();
         boxes = new ArrayList<>();
     }
 
-    public Chain(List<Article> articles) {
+    public Chain(String initialization, List<Article> articles) {
+        this.initialization = initialization;
         this.articles = articles;
         this.articles.forEach(article -> article.setChain(this));
         this.boxes = new ArrayList<>();
@@ -53,5 +56,9 @@ public class Chain {
 
     public boolean addBox(Box box) {
         return boxes.add(box);
+    }
+
+    public String getInitialization() {
+        return initialization;
     }
 }

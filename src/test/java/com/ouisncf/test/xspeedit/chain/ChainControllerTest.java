@@ -59,7 +59,7 @@ public class ChainControllerTest {
     @Test
     public void shouldReturnANonEmptyListWithSelfLink() throws Exception {
         List<Article> articleList = Lists.newArrayList(new Article(1));
-        List<Chain> chainList = Lists.newArrayList(new Chain(articleList));
+        List<Chain> chainList = Lists.newArrayList(new Chain("1", articleList));
         when(chainService.getAll()).thenReturn(chainList);
         this.mockMvc
                 .perform(
@@ -90,7 +90,7 @@ public class ChainControllerTest {
     @Test
     public void shouldReturnAChainWithLinks() throws Exception {
         List<Article> articleList = Lists.newArrayList(new Article(1));
-        Chain chain = new Chain(articleList);
+        Chain chain = new Chain("1", articleList);
         when(chainService.getOne(anyLong())).thenReturn(chain);
         this.mockMvc
                 .perform(
@@ -101,6 +101,7 @@ public class ChainControllerTest {
                 .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.chains").exists())
+                .andExpect(jsonPath("initialization").exists())
                 .andExpect(jsonPath("articles").exists())
                 .andExpect(jsonPath("articles", hasSize(1)))
         ;

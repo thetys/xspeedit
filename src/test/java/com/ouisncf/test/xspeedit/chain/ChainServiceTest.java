@@ -67,6 +67,7 @@ public class ChainServiceTest {
     public void shouldFetchAll() {
         Chain chainOne = entityManager.persist(
                 new Chain(
+                        "17",
                         Arrays.asList(
                                 new Article(1),
                                 new Article(7)
@@ -75,6 +76,7 @@ public class ChainServiceTest {
         );
         Chain chainTwo = entityManager.persist(
                 new Chain(
+                        "25",
                         Arrays.asList(
                                 new Article(2),
                                 new Article(5)
@@ -99,6 +101,7 @@ public class ChainServiceTest {
     public void shouldFetchASpecificChain() {
         Chain chainOne = entityManager.persist(
                 new Chain(
+                        "17",
                         Arrays.asList(
                                 new Article(1),
                                 new Article(7)
@@ -107,6 +110,7 @@ public class ChainServiceTest {
         );
         Chain chainTwo = entityManager.persist(
                 new Chain(
+                        "25",
                         Arrays.asList(
                                 new Article(2),
                                 new Article(5)
@@ -126,6 +130,7 @@ public class ChainServiceTest {
     public void shouldPackArticles() {
         Chain chain =
                 new Chain(
+                        "163841689525773",
                         IntStream.of(1,6,3,8,4,1,6,8,9,5,2,5,7,7,3)
                         .mapToObj(Article::new)
                         .collect(Collectors.toList())

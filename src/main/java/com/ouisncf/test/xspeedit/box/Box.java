@@ -23,10 +23,6 @@ public class Box {
         articles = new ArrayList<>();
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public List<Article> getArticles() {
         return articles;
     }

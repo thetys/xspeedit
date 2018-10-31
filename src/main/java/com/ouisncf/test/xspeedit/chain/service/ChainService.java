@@ -31,11 +31,14 @@ public class ChainService {
      * @return Chain Newly created chain
      */
     public Chain createChain(String articles) {
+        if (articles == null) {
+            throw new IllegalChainArgumentException("No article list found.");
+        }
         if (!articles.matches("^[1-9]+$")) {
             throw new IllegalChainArgumentException("Article list must be a positive digit sequence with at least one element.");
         }
         return chainRepository.save(
-                new Chain(splitToListOfArticles(articles))
+                new Chain(articles, splitToListOfArticles(articles))
         );
     }
 
