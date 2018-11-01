@@ -17,16 +17,18 @@ Chacune de ces chaînes étant composées d'articles et de boîtes
 
 ### Prérequis
 
-L'application nécessite Java 1.8 minimum
+* Java 1.8+
+* Maven 3
+* Git
 
 ### Installation
 
-* Récupérer le fichier xspeedit-1.0.jar à la racine du projet
-* Exécuter la commande suivante pour démarrer l'application
-  ```shell
-  java -jar xspeedit-1.0.jar
-  ```
-* L'api est disponible par défaut sur le port 8080
+* Si vous n'avez pas déjà les sources sur votre poste, faire un `git clone https://github.com/thetys/xspeedit.git`
+* Se placer à la racine du répertoire des sources
+* Exécuter la commande `mvn clean install`, un fichier xspeedit-1.0.jar est apparu dans le répertoire target/
+* Se placer dans le répertoire target/
+* Exécuter la commande `java -jar xspeedit-1.0.jar` pour démarrer l'application
+* L'api est disponible par défaut sur le port 8080, pour changer le port utilisé rajouter le paramètre `--server.port=<n° du port>` à la commande ci-dessus
 
 ### Utilisation
 
